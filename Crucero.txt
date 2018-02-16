@@ -1,0 +1,22 @@
+{ 
+    "_id" : ObjectId("5a87560f28522c22f481e735"), 
+    "codigo" : "1          ", 
+    "registro" : "S0001", 
+    "nombre" : "Navio", 
+    "tipo" : "ALF", 
+    "capacidad" : NumberDecimal("227"), 
+    "creationDate" : ISODate("2018-02-16T22:07:11.242+0000"), 
+    "lastChange" : ISODate("2018-02-16T22:07:11.242+0000"), 
+    "version" : NumberLong(1)
+}
+{ 
+    "_id" : ObjectId("5a87566c28522c22f481e736"), 
+    "codigo" : "2", 
+    "registro" : "S0002", 
+    "nombre" : "Lunatico", 
+    "tipo" : "OME", 
+    "capacidad" : NumberDecimal("400"), 
+    "creationDate" : ISODate("2018-02-16T22:08:44.715+0000"), 
+    "lastChange" : ISODate("2018-02-16T22:08:44.715+0000"), 
+    "version" : NumberLong(1)
+}

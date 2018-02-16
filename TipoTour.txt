@@ -1,0 +1,30 @@
+{ 
+    "_id" : ObjectId("5a8759eb28522c22f4c0c376"), 
+    "codigo" : "500", 
+    "nombre" : "Aventura Magica", 
+    "descripcion" : "Familiar", 
+    "duracion" : NumberInt(4), 
+    "creationDate" : ISODate("2018-02-16T22:23:39.846+0000"), 
+    "lastChange" : ISODate("2018-02-16T22:23:39.846+0000"), 
+    "version" : NumberLong(1)
+}
+{ 
+    "_id" : ObjectId("5a875a1228522c22f4c0c377"), 
+    "codigo" : "501", 
+    "nombre" : "Aventura Ideal", 
+    "descripcion" : "Familiar", 
+    "duracion" : NumberInt(5), 
+    "creationDate" : ISODate("2018-02-16T22:24:18.598+0000"), 
+    "lastChange" : ISODate("2018-02-16T22:24:18.598+0000"), 
+    "version" : NumberLong(1)
+}
+{ 
+    "_id" : ObjectId("5a875a2f28522c22f4c0c378"), 
+    "codigo" : "502", 
+    "nombre" : "Aventura Extrema", 
+    "descripcion" : "Extremo ", 
+    "duracion" : NumberInt(8), 
+    "creationDate" : ISODate("2018-02-16T22:24:47.514+0000"), 
+    "lastChange" : ISODate("2018-02-16T22:24:47.514+0000"), 
+    "version" : NumberLong(1)
+}
