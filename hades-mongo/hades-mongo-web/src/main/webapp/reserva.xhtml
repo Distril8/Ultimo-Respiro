@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/plantilla.xhtml">
+        <ui:define name="contenido">
+            <p:panel id="mainPnl" header="Reserva" style="width: 50%; margin: auto;"> 
+                <p:commandButton value="Agregar" actionListener="#{reservaBean.agregar()}" update="@form"/>
+                <p:panel header="Registrar Reserva" rendered="#{reservaBean.habilitaForm}">
+                
+                    <p:panelGrid columns="2" style="margin-top:10px">
+                        <p:outputLabel for="clienteCmb" value="Cliente" />
+                        <p:selectOneMenu id="clienteCmb" value="#{reservaBean}" rendered="true">
+                            <f:selectItems var="cliente" value="#{reservaBean.clientes}" itemLabel="#{cliente.identificacion} #{cliente.nombre} #{cliente.apellido}" itemValue="#{cliente.identificacion} " />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tourCmb" value="Tour" />
+                        <p:selectOneMenu id="tourCmb" value="#{reservaBean}" rendered="true">
+                            <f:selectItems var="tour" value="#{reservaBean.tours}" itemLabel="#{tour.nombre} #{tour.tipoTour.nombre} " itemValue="#{tour.codigo}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="camarote" value="Camarote" />
+                        <p:selectOneMenu id="camarote" value="#{reservaBean}" rendered="true">
+                            <f:selectItems var="camarote" value="#{reservaBean.camarotes}"  itemValue="#{camarote}" itemLabel="#{camarote.numero}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoCam" value="Tipo de camarote" />
+                        <p:outputLabel id="tipoCam" value="#{reservaBean.camarote.tipo.nombre}"/>
+                        <p:outputLabel for="tipoAlimentacion" value="Tipo Alimentacion" />
+                        <p:selectOneMenu id="tipoAlimentacion" value="#{reservaBean}" rendered="true">
+                            <f:selectItems var="tipoAlimentacion" value="#{reservaBean.alimentaciones}"  itemValue="#{tipoAlimentacion.codigo}" itemLabel="#{tipoAlimentacion.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Fecha Emision" />
+                        <p:calendar id="fechaEmision" value="#{reservaBean.reserva}" showOn="button" pattern="MM/dd/yyyy"/>
+                        <p:outputLabel value="Estado" />
+                        <p:selectOneMenu id="estado" >
+                            <f:selectItem itemValue="PRE" itemLabel="PRE-RESERVA"/>
+                            <f:selectItem itemValue="RES" itemLabel="RESERVADO"/>
+                            <f:selectItem itemValue="ANU" itemLabel="ANULADO"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Valor" />
+                        <p:outputLabel id="valor" value="= #{reservaBean.reserva.valorFinal}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Aceptar" actionListener="#{reservaBean.guardar}" update="@form" />
+                    <p:commandButton value="Cancelar" actionListener="#{reservaBean.cancelar}" update="@form" immediate="true"/>
+                </p:panel>
+                
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,90 @@
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc592945958261883a673"), 
+    "codigo" : "1000", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Presidencial", 
+    "numero" : "1", 
+    "capacidad" : "4", 
+    "ubicacion" : "Norte-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc592945958261883a672"), 
+    "codigo" : "1001", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Presidencial", 
+    "numero" : "1", 
+    "capacidad" : "4", 
+    "ubicacion" : "Norte-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc592945958261883a671"), 
+    "codigo" : "1002", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Presidencial", 
+    "numero" : "3", 
+    "capacidad" : "4", 
+    "ubicacion" : "Norte-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc592945958261883a670"), 
+    "codigo" : "1004", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Placer", 
+    "numero" : "5", 
+    "capacidad" : "5", 
+    "ubicacion" : "Este-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc592941958261883a670"), 
+    "codigo" : "1005", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Placer", 
+    "numero" : "6", 
+    "capacidad" : "5", 
+    "ubicacion" : "Este-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("5a7fc192941958261883a670"), 
+    "codigo" : "1006", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Placer", 
+    "numero" : "7", 
+    "capacidad" : "5", 
+    "ubicacion" : "Este-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("3a7fc192941958261883a670"), 
+    "codigo" : "1007", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Placer", 
+    "numero" : "8", 
+    "capacidad" : "6", 
+    "ubicacion" : "Este-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("4a7fc192941958261883a670"), 
+    "codigo" : "1008", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Ecologico", 
+    "numero" : "9", 
+    "capacidad" : "6", 
+    "ubicacion" : "Sur-Barco"
+}
+// Newly added document
+{ 
+    "_id" : ObjectId("9a7fc192941958261883a670"), 
+    "codigo" : "1009", 
+    "nomCrucero" : "Alfa", 
+    "nomTipo" : "Ecologico", 
+    "numero" : "10", 
+    "capacidad" : "6", 
+    "ubicacion" : "Sur-Barco"
+}
