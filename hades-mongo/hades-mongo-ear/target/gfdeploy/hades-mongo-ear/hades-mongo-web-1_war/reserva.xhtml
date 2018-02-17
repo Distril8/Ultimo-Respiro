@@ -9,8 +9,7 @@
     <ui:composition template="/templates/plantilla.xhtml">
         <ui:define name="contenido">
             <p:panel id="mainPnl" header="Reserva" style="width: 50%; margin: auto;"> 
-                <p:commandButton value="Agregar" actionListener="#{reservaBean.agregar()}" update="@form"/>
-                <p:panel header="Registrar Reserva" rendered="#{reservaBean.habilitaForm}">
+                
                 
                     <p:panelGrid columns="2" style="margin-top:10px">
                         <p:outputLabel for="clienteCmb" value="Cliente" />
@@ -39,15 +38,35 @@
                             <f:selectItem itemValue="RES" itemLabel="RESERVADO"/>
                             <f:selectItem itemValue="ANU" itemLabel="ANULADO"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Valor" />
-                        <p:outputLabel id="valor" value="= #{reservaBean.reserva.valorFinal}"/>
-
                     </p:panelGrid>
-                    <p:commandButton value="Aceptar" actionListener="#{reservaBean.guardar}" update="@form" />
-                    <p:commandButton value="Cancelar" actionListener="#{reservaBean.cancelar}" update="@form" immediate="true"/>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:commandButton value="Guardar Reserva" actionListener="#{turistaBean.guardar}" update="@form"/>
+                    <p:commandButton value="Agregar Turista" actionListener="#{turistaBean.agregar()}" update="@form"/>
+                    
+                    <p:panel header="#{turistaBean.titulo} Turista" visible="#{turistaBean.habilitaForm}">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Tipo de Identificacion" />
+                            <p:selectOneMenu id="tipoIndentificacion" value="#{turistaBean.turista.tipoIdentificacion}">
+                            <f:selectItem itemValue="CED" itemLabel="CEDULA"/>
+                            <f:selectItem itemValue="RUC" itemLabel="RUC"/>
+                        </p:selectOneMenu>
+                            <p:outputLabel for="identificacion" value="Identificacion" />
+                            <p:inputText id="identificacion" value="#{turistaBean.turista.identificacion}" />
+                            <p:outputLabel for="nombreTu" value="Nombre del Turista" />
+                            <p:inputText id="nombreTu" value="#{turistaBean.turista.nombre}" />
+                            <p:outputLabel for="fechaNace" value="Fecha de Nacimiento" />
+                            <p:calendar id="fechaNace" value="#{turistaBean.turista.fechaNacimiento}" showOn="button" pattern="MM/dd/yyyy"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" actionListener="#{turistaBean.guardarTemp}" update="@form" />
+                        <p:commandButton value="Cancelar" actionListener="#{turistaBean.cancelar}" update="@form" />
+                    </p:panel>
+                
                 </p:panel>
                 
-            </p:panel>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
 
         </ui:define>
     </ui:composition>

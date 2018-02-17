@@ -45,6 +45,8 @@ public class TuristaService {
     public void crear(TuristaReserva turista) {
         this.turistaDao.save(turista);
     }
+    
+    
 
     public void modificar(TuristaReserva turista) {
         TuristaReserva aux = this.turistaDao.findOne("codigo", turista.getCodigo());

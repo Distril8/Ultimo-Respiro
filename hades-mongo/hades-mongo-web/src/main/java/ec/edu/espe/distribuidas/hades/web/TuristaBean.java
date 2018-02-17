@@ -7,12 +7,15 @@
  */
 package ec.edu.espe.distribuidas.hades.web;
 
-import ec.edu.espe.distribuidas.hades.model.Cliente;
+import ec.edu.espe.distribuidas.hades.model.Reserva;
 import ec.edu.espe.distribuidas.hades.model.TuristaReserva;
+import ec.edu.espe.distribuidas.hades.service.ReservaService;
 import ec.edu.espe.distribuidas.hades.service.TuristaService;
 import ec.edu.espe.distribuidas.hades.web.util.FacesUtil;
 import java.io.Serializable;
+
 import java.util.List;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -27,11 +30,14 @@ import javax.inject.Named;
 public class TuristaBean extends BaseBean implements Serializable {
     
     private List<TuristaReserva> turistas;
-
+    private List<TuristaReserva> turistaTemp;
     private TuristaReserva turista;
-
+    private Reserva reserva;
     private TuristaReserva turistaSel;
 
+    
+    @Inject
+    private ReservaService reservaService;
     @Inject
     private TuristaService turistaService;
 
@@ -39,6 +45,7 @@ public class TuristaBean extends BaseBean implements Serializable {
     public void init() {
         this.turistas = this.turistaService.obtenerTodos();
         this.turista = new TuristaReserva();
+        this.reserva = new Reserva();
     }
 
 
@@ -73,9 +80,31 @@ public class TuristaBean extends BaseBean implements Serializable {
     }
 
     public void guardar() {
+        int a= new Random().nextInt(10000);
+       try {
+            for (int i = 0; i < this.turistaTemp.size(); i++) {
+                this.turistaTemp.get(i).setCodReserva(a);
+                this.turistaService.crear(this.turistaTemp.get(i));
+           }
+            this.reserva.setCodigo(Integer.toString(a));
+            this.reservaService.crear(this.reserva);
+            FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
+            
+            
+        } catch (Exception ex) {
+            FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n");
+        }
+        super.reset();
+        this.turista = new TuristaReserva();
+        this.turistas = this.turistaService.obtenerTodos();
+    }
+
+    public void guardarTemp() {
        try {
             if (this.enAgregar) {
-                this.turistaService.crear(this.turista);
+            this.turista.setCodigo(new Random().nextInt(10000));
+            this.turistaTemp.add(turista);
+//this.turistaService.crear(this.turista);
                 FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
             } else {
                 this.turistaService.modificar(this.turista);
@@ -88,6 +117,17 @@ public class TuristaBean extends BaseBean implements Serializable {
         this.turista = new TuristaReserva();
         this.turistas = this.turistaService.obtenerTodos();
     }
+
+    public List<TuristaReserva> getTuristaTemp() {
+        return turistaTemp;
+    }
+
+    public void setTuristaTemp(List<TuristaReserva> turistaTemp) {
+        this.turistaTemp = turistaTemp;
+    }
+    
+    
+
 
     public List<TuristaReserva> getTuristas() {
         return turistas;

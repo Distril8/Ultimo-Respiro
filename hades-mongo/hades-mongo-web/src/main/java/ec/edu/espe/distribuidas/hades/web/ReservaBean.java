@@ -94,36 +94,38 @@ public class ReservaBean  extends BaseBean implements Serializable{
     }
     
     
-    /*public void guardar() {
-        this.reserva.setCliente(this.clienteService.obtenerPorIdentificacion(this.cliente.getClientePK().getIdentificacion()));
-        this.reserva.setCamarote(this.camaroteService.obtenerInfoCamarote(this.tour.getCrucero().getCodigo(),(int) this.camarote.getNumero()));
+    public void guardar() {
+        this.reservaService.crear(this.reserva);
         
-        this.reserva.setCodigo(codRandom());
-        this.reserva.setIdentificacion(this.reserva.getCliente().getClientePK().getIdentificacion());
-        this.reserva.setTipoIdentificacion(this.reserva.getCliente().getClientePK().getTipoIdentificacion());
-        this.reserva.setCodTour(this.tour.getPk().getCodTour());
-        this.reserva.setCodTipoTour(this.tour.getPk().getCodTipoTour());
-        this.reserva.setCodCrucero(this.tour.getPk().getCodCrucero());
-        this.reserva.setCodCamarote(this.camarote.getPk().getCodCamarote());
-        this.reserva.setCodTipoCamarote(this.camarote.getPk().getCodTipoCamarote());
-        this.reserva.setCodTipoAlimentacion(this.alimentacion.getCodigo());
-
-        System.out.println("ID Cliente en reserva: "+ this.reserva.getIdentificacion());
-        System.out.println("Tipo de identificacion en reserva: "+ this.reserva.getTipoIdentificacion());
-        System.out.println("Cod Tour: "+ this.reserva.getCodTour());
-        System.out.println("Tipo Tour: "+ this.reserva.getCodTipoTour());
-        System.out.println("Cod Crucero: "+ this.reserva.getCodCrucero());
-        System.out.println("Camarote: "+ this.reserva.getCodCamarote());
-        System.out.println("Tipo camarote: "+ this.reserva.getCodTipoCamarote());
-        System.out.println("Tipo alimentacion: "+ this.reserva.getCodTipoAlimentacion());
-        System.out.println("Fecha: "+ this.reserva.getFechaEmision());       
-        System.out.println("random "+ codRandom());
-        
-        super.reset();
-        this.reservaService.crear(reserva);
-        FacesUtil.addMessageInfo("Se creo la reserva");
-        
-    }*/
+//        this.reserva.setCliente(this.clienteService.obtenerPorIdentificacion(this.cliente.getClientePK().getIdentificacion()));
+//        this.reserva.setCamarote(this.camaroteService.obtenerInfoCamarote(this.tour.getCrucero().getCodigo(),(int) this.camarote.getNumero()));
+//        
+//        this.reserva.setCodigo(codRandom());
+//        this.reserva.setIdentificacion(this.reserva.getCliente().getClientePK().getIdentificacion());
+//        this.reserva.setTipoIdentificacion(this.reserva.getCliente().getClientePK().getTipoIdentificacion());
+//        this.reserva.setCodTour(this.tour.getPk().getCodTour());
+//        this.reserva.setCodTipoTour(this.tour.getPk().getCodTipoTour());
+//        this.reserva.setCodCrucero(this.tour.getPk().getCodCrucero());
+//        this.reserva.setCodCamarote(this.camarote.getPk().getCodCamarote());
+//        this.reserva.setCodTipoCamarote(this.camarote.getPk().getCodTipoCamarote());
+//        this.reserva.setCodTipoAlimentacion(this.alimentacion.getCodigo());
+//
+//        System.out.println("ID Cliente en reserva: "+ this.reserva.getIdentificacion());
+//        System.out.println("Tipo de identificacion en reserva: "+ this.reserva.getTipoIdentificacion());
+//        System.out.println("Cod Tour: "+ this.reserva.getCodTour());
+//        System.out.println("Tipo Tour: "+ this.reserva.getCodTipoTour());
+//        System.out.println("Cod Crucero: "+ this.reserva.getCodCrucero());
+//        System.out.println("Camarote: "+ this.reserva.getCodCamarote());
+//        System.out.println("Tipo camarote: "+ this.reserva.getCodTipoCamarote());
+//        System.out.println("Tipo alimentacion: "+ this.reserva.getCodTipoAlimentacion());
+//        System.out.println("Fecha: "+ this.reserva.getFechaEmision());       
+//        System.out.println("random "+ codRandom());
+//        
+//        super.reset();
+//        this.reservaService.crear(reserva);
+//        FacesUtil.addMessageInfo("Se creo la reserva");
+//        
+    }
     
     public void cancelar() {
         super.reset();
