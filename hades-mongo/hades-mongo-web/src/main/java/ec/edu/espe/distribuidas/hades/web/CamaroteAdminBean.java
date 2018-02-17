@@ -107,4 +107,35 @@ public class CamaroteAdminBean extends BaseBean implements Serializable{
     public void setCamaroteSel(Camarote camaroteSel) {
         this.camaroteSel = camaroteSel;
     }
+    
+     public TipoCamarote retornaTipoTour(Camarote camarote)
+    {
+        TipoCamarote aux = new TipoCamarote();
+        
+        for(int i= 0; i<tiposCamarote.size();i++)
+        {
+            aux= tiposCamarote.get(i);
+            if(aux.getCodigo().equals(camarote.getTipo().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    public Crucero retornaCrucero(Camarote camarote)
+    {
+        Crucero aux = new Crucero();
+        
+        for(int i= 0; i<camarotes.size();i++)
+        {
+            aux= cruceros.get(i);
+            if(aux.getCodigo().equals(camarote.getCrucero().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+  
 }

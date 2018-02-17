@@ -35,10 +35,12 @@ public class Reserva extends BaseEntity{
     private Crucero crucero;
     @Reference
     private Camarote camarote;
-    //@Reference
-    //private TipoAlimentacion tipoAlimentacion;
+    @Reference
+    private TipoAlimentacion tipoAlimentacion;
     @Reference
     private TipoCamarote tipoCamarote;
+    @Reference
+    private Cliente cliente;
     private BigDecimal valorFinal;
     private Date fechaEmision;
     private EstadoReservaEnum estado;
@@ -49,6 +51,23 @@ public class Reserva extends BaseEntity{
     public String getCodigo() {
         return codigo;
     }
+
+    public TipoAlimentacion getTipoAlimentacion() {
+        return tipoAlimentacion;
+    }
+
+    public void setTipoAlimentacion(TipoAlimentacion tipoAlimentacion) {
+        this.tipoAlimentacion = tipoAlimentacion;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;

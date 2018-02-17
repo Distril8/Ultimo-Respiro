@@ -34,7 +34,7 @@ public class TuristaBean extends BaseBean implements Serializable {
     private TuristaReserva turista;
     private Reserva reserva;
     private TuristaReserva turistaSel;
-
+    private List<Reserva> reservas;
     
     @Inject
     private ReservaService reservaService;
@@ -45,13 +45,14 @@ public class TuristaBean extends BaseBean implements Serializable {
     public void init() {
         this.turistas = this.turistaService.obtenerTodos();
         this.turista = new TuristaReserva();
-        this.reserva = new Reserva();
+        this.reservas = this.reservaService.obtenerTodos();
     }
 
 
     @Override
     public void agregar() {
         this.turista = new TuristaReserva();
+        this.reservas = this.reservaService.obtenerTodos();
         super.agregar();
         
     }
@@ -65,7 +66,8 @@ public class TuristaBean extends BaseBean implements Serializable {
         this.turista.setNombre(this.turistaSel.getNombre());
         this.turista.setFechaNacimiento(this.turistaSel.getFechaNacimiento());
         this.turista.setPesoMaleta(this.turistaSel.getPesoMaleta());
-        this.turista.setCodReserva(this.turistaSel.getCodReserva());
+        this.turista.setReserva(this.turistaSel.getReserva());
+        
     }
 
     @Override
@@ -77,50 +79,32 @@ public class TuristaBean extends BaseBean implements Serializable {
     public void cancelar() {
         super.reset();
         this.turista = new TuristaReserva();
+        this.reservas = this.reservaService.obtenerTodos();
+                
     }
 
     public void guardar() {
-        int a= new Random().nextInt(10000);
+       int a= new Random().nextInt(10000);
+       turista.setReserva(retornaReserva(reserva));
        try {
-//            for (int i = 0; i < this.turistaTemp.size(); i++) {
-//                this.turistaTemp.get(i).setCodReserva(a);
-//                this.turistaService.crear(this.turistaTemp.get(i));
-//           }
-            
-//            this.reserva.setCodigo(Integer.toString(a));
-//            this.reservaService.crear(this.reserva);
-             this.turista.setCodigo(1);
-             this.turistaService.crear(this.turista);
-            FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
-            
-            
-        } catch (Exception ex) {
-            FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n" + ex);
-            
-        }
-        super.reset();
-        this.turista = new TuristaReserva();
-        this.turistas = this.turistaService.obtenerTodos();
-    }
-
-    public void guardarTemp() {
-       try {
-            if (this.enAgregar) {
-            this.turista.setCodigo(new Random().nextInt(10000));
-            this.turistaTemp.add(turista);
-            FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
+             if (this.enAgregar) {
+                this.turistaService.crear(this.turista);
+                FacesUtil.addMessageInfo("Se agrego el Turista: " + this.turista.getNombre());
             } else {
                 this.turistaService.modificar(this.turista);
-                FacesUtil.addMessageInfo("Se modific\u00f3 el Turista: " + this.turista.getNombre());
+                FacesUtil.addMessageInfo("Se modific\u00f3 la Actividad con c\u00f3digo: " + this.turista.getNombre());
             }
-        } catch (Exception ex) {
-            System.out.println("Codigo"+ turistaTemp.get(0).getCodigo() );
+
+        } catch (Exception e) {
             FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n");
         }
+
         super.reset();
         this.turista = new TuristaReserva();
         this.turistas = this.turistaService.obtenerTodos();
+        this.reservas = this.reservaService.obtenerTodos();
     }
+
 
     public List<TuristaReserva> getTuristaTemp() {
         return turistaTemp;
@@ -157,6 +141,20 @@ public class TuristaBean extends BaseBean implements Serializable {
         this.turistaSel = turistaSel;
     }
 
-   
+    public Reserva retornaReserva(Reserva reserva)
+    {
+        Reserva aux = new Reserva();
+        
+        for(int i= 0; i<reservas.size();i++)
+        {
+            aux= reservas.get(i);
+            if(aux.getCodigo().equals(reserva.getTipoTour().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
     
 }

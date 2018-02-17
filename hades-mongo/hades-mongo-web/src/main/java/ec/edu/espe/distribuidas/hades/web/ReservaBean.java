@@ -7,10 +7,12 @@
  */
 package ec.edu.espe.distribuidas.hades.web;
 
+import ec.edu.espe.distribuidas.hades.model.Cliente;
 import ec.edu.espe.distribuidas.hades.model.Crucero;
 import ec.edu.espe.distribuidas.hades.model.Reserva;
 import ec.edu.espe.distribuidas.hades.model.TipoTour;
 import ec.edu.espe.distribuidas.hades.model.Tour;
+import ec.edu.espe.distribuidas.hades.service.ClienteService;
 import ec.edu.espe.distribuidas.hades.service.CruceroService;
 import ec.edu.espe.distribuidas.hades.service.ReservaService;
 import ec.edu.espe.distribuidas.hades.service.TipoTourService;
@@ -38,6 +40,7 @@ public class ReservaBean extends BaseBean implements Serializable {
     private List<Crucero> cruceros;
     private List<Tour> tours;
     private Tour tour;
+    private List<Cliente> clientes;
 
     @Inject
     private ReservaService reservaService;
@@ -47,13 +50,16 @@ public class ReservaBean extends BaseBean implements Serializable {
     private TipoTourService tipoTourService;
     @Inject
     private CruceroService cruceroService;
+    
+    @Inject
+    private ClienteService clienteService;
 
     @PostConstruct
     public void init() {
         this.tours = this.tourService.obtenerTodos();
-        this.tour = new Tour();
         this.tiposTours = this.tipoTourService.obtenerTodos();
         this.cruceros = this.cruceroService.obtenerTodos();
+        this.clientes = this.clienteService.obtenerTodos();
         this.reservas = this.reservaService.obtenerTodos();
         this.reserva = new Reserva();
     }
@@ -61,7 +67,9 @@ public class ReservaBean extends BaseBean implements Serializable {
     @Override
     public void agregar() {
         this.reserva = new Reserva();
-        this.reservas = this.reservaService.obtenerTodos();
+        this.clientes = clienteService.obtenerTodos();
+        this.tours = tourService.obtenerTodos();
+        this.cruceros = cruceroService.obtenerTodos();
         
         super.agregar();
     }
@@ -69,26 +77,21 @@ public class ReservaBean extends BaseBean implements Serializable {
     public void cancelar() {
         super.reset();
         this.reserva = new Reserva();
-        this.reservas = this.reservaService.obtenerTodos();
+        this.clientes = clienteService.obtenerTodos();
+        this.tours = tourService.obtenerTodos();
+        this.cruceros = cruceroService.obtenerTodos();
         
     }
 
-//    @Override
-//    public void modificar() {
-//        super.modificar();
-//        this.reserva = new Reserva();
-//        this.tour.setCodigo(this.tourSel.getCodigo());
-//        this.tour.setTipoTour(this.tourSel.getTipoTour());
-//        this.tour.setCrucero(this.tourSel.getCrucero());
-//        this.tour.setNombre(this.tourSel.getNombre());
-//        this.tour.setDuracion(this.tourSel.getDuracion());
-//        this.tour.setFechaInicio(this.tourSel.getFechaInicio());
-//        this.tour.setFechaInicio(this.tourSel.getFechaFin());
-//        this.tour.setPuertoEmbarque(this.tourSel.getPuertoEmbarque());
-//        this.tour.setPuertoDesembarque(this.tourSel.getPuertoDesembarque());
-//        this.tour.setPrecioBase(this.tourSel.getPrecioBase());
-//        this.tour.setPorcentajeMenu(this.tourSel.getPorcentajeMenu());
-//    }
+    @Override
+    public void modificar() {
+        super.modificar();
+        this.reserva = new Reserva();
+        this.reserva.setCodigo(this.reservaSel.getCodigo());
+        this.reserva.setTour(this.reservaSel.getTour());
+        this.reserva.setCrucero(this.reservaSel.getCrucero());
+        this.reserva.setEstado(this.reservaSel.getEstado());
+    }
 
 //    public void eliminar() {
 //        try {
@@ -104,6 +107,9 @@ public class ReservaBean extends BaseBean implements Serializable {
     public void guardar() {
         try {
 
+            reserva.setTour(retornaTour(this.reserva));
+            reserva.setCrucero(retornaCrucero(this.reserva));
+            reserva.setCliente(retornaCliente(this.reserva));
             if (this.enAgregar) {
                 this.reservaService.crear(this.reserva);
                 FacesUtil.addMessageInfo("Se agrego La reserva: " + this.reserva.getCodigo());
@@ -120,6 +126,9 @@ public class ReservaBean extends BaseBean implements Serializable {
         this.reserva = new Reserva();
         //this.actividadPK = new ActividadPK();
         this.reservas = this.reservaService.obtenerTodos();
+        this.cruceros = this.cruceroService.obtenerTodos();
+        this.tours = this.tourService.obtenerTodos();
+        this.clientes = this.clienteService.obtenerTodos();
         
         
     }
@@ -176,5 +185,64 @@ public class ReservaBean extends BaseBean implements Serializable {
 
     public List<Crucero> getCruceros() {
         return cruceros;
+    }
+    
+    public Tour retornaTour(Reserva reserva)
+    {
+        Tour aux = new Tour();
+        
+        for(int i= 0; i<tours.size();i++)
+        {
+            aux= tours.get(i);
+            if(aux.getCodigo().equals(reserva.getTour().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    public Crucero retornaCrucero(Reserva reserva)
+    {
+        Crucero aux = new Crucero();
+        
+        for(int i= 0; i<reservas.size();i++)
+        {
+            aux= cruceros.get(i);
+            if(aux.getCodigo().equals(reserva.getCrucero().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    public Cliente retornaCliente(Reserva reserva)
+    {
+        Cliente aux = new Cliente();
+        
+        for(int i= 0; i<reservas.size();i++)
+        {
+            aux= clientes.get(i);
+            if(aux.getIdentificacion().equals(reserva.getCliente().getIdentificacion()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    public TipoTour recuperaTipoTour(TipoTour tipoTour)
+    {
+        TipoTour aux = new TipoTour();
+        
+        for(int i= 0; i<tiposTours.size();i++)
+        {
+            aux= tiposTours.get(i);
+            if(aux.getCodigo().equals(tipoTour.getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
     }
 }

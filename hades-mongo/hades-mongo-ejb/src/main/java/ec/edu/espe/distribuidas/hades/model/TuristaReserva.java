@@ -35,6 +35,10 @@ public class TuristaReserva extends BaseEntity {
     public TuristaReserva() {
     }
 
+    public TuristaReserva(Reserva Reserva) {
+        this.Reserva = Reserva;
+    }
+
     
     
     public TuristaReserva(Integer codigo) {
@@ -49,6 +53,7 @@ public class TuristaReserva extends BaseEntity {
         this.codigo = codigo;
     }
 
+    
     public Integer getCodReserva() {
         return codReserva;
     }

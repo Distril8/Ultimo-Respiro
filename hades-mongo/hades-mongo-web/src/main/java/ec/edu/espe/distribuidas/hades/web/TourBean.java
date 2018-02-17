@@ -67,9 +67,9 @@ public class TourBean extends BaseBean implements Serializable {
         if (this.enBusquedaPorTipo) {
             TipoTour tipoTour = new TipoTour();
             tipoTour.setCodigo(this.tipoTourBusqueda);
-            this.tours = this.tourService.buscarPorTipo(recuperaTipoTour(tipoTour));
+            //this.tours = this.tourService.buscarPorTipo(recuperaTipoTour(tipoTour));
         } else {
-            this.tours = this.tourService.buscarPorFechas(this.fechaInicioBusqueda, this.fechaFinBusqueda);
+           // this.tours = this.tourService.buscarPorFechas(this.fechaInicioBusqueda, this.fechaFinBusqueda);
         }
     }
 
