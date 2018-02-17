@@ -1,4 +1,5 @@
 ec\edu\espe\distribuidas\hades\service\TipoCamaroteService.class
+ec\edu\espe\distribuidas\hades\dao\CheckOutDAO.class
 ec\edu\espe\distribuidas\hades\service\TourService.class
 ec\edu\espe\distribuidas\hades\model\Cliente.class
 ec\edu\espe\distribuidas\nosql\mongo\MongoPersistence.class
@@ -25,6 +26,7 @@ ec\edu\espe\distribuidas\hades\service\TuristaService.class
 ec\edu\espe\distribuidas\hades\enums\OrdenTipoValorEnum.class
 ec\edu\espe\distribuidas\hades\model\ValorReserva.class
 ec\edu\espe\distribuidas\hades\enums\MenuEnum.class
+ec\edu\espe\distribuidas\hades\model\CheckOut.class
 ec\edu\espe\distribuidas\hades\model\DetalleFactura.class
 ec\edu\espe\distribuidas\hades\dao\MenuDAO.class
 ec\edu\espe\distribuidas\nosql\mongo\config\ConfigReader.class
@@ -34,6 +36,7 @@ ec\edu\espe\distribuidas\hades\model\Factura.class
 ec\edu\espe\distribuidas\hades\enums\EstadoReservaEnum.class
 ec\edu\espe\distribuidas\hades\enums\TipoValorEnum.class
 ec\edu\espe\distribuidas\hades\dao\ReservaDAO.class
+ec\edu\espe\distribuidas\hades\service\CheckOutService.class
 ec\edu\espe\distribuidas\hades\model\TipoAlimentacion.class
 ec\edu\espe\distribuidas\hades\service\CamaroteService.class
 ec\edu\espe\distribuidas\hades\dao\TourDAO.class
