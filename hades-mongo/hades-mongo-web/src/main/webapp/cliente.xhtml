@@ -13,7 +13,7 @@
                              selectionMode="single" selection="#{clienteBean.clienteSel}" rowKey="#{cliente.id}">
                     <p:ajax event="rowSelect" update="@form" />
                     <p:ajax event="rowUnselect" update="@form" />
-                    <p:column headerText="Identificacion">
+                    <p:column headerText="Identificaci&#243;n">
                         <h:outputText value="#{cliente.identificacion}" />
                     </p:column>
                     <p:column headerText="Nombre">
@@ -22,7 +22,7 @@
                     <p:column headerText="Apellido">
                         <h:outputText value="#{cliente.apellido}" />
                     </p:column>
-                    <p:column headerText="Direccion">
+                    <p:column headerText="Direcci&#243;n">
                         <h:outputText value="#{cliente.direccion}" />
                     </p:column>
                 </p:dataTable>

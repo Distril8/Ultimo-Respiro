@@ -17,7 +17,7 @@ and open the template in the editor.
                              selectionMode="single" selection="#{tipoValorBean.tipoValorSel}" rowKey="#{tipoValor.codigo}">
                     <p:ajax event="rowSelect" update="@form" />
                     <p:ajax event="rowUnselect" update="@form" />
-                    <p:column headerText="Codigo">
+                    <p:column headerText="C&#243;digo">
                         <h:outputText value="#{tipoValor.codigo}" />
                     </p:column>
                     <p:column headerText="Nombre">
@@ -41,7 +41,7 @@ and open the template in the editor.
                 </p:commandButton>
                 <p:panel header="#{tipoValorBean.titulo} Tipo Valor" visible="#{tipoValorBean.habilitaForm}">
                     <p:panelGrid columns="2">
-                        <p:outputLabel for="codigo" value="Codigo" />
+                        <p:outputLabel for="codigo" value="C&#243;digo" />
                         <p:inputText id="codigo" value="#{tipoValorBean.tipoValor.codigo}" disabled="#{tipoValorBean.enModificar}"/>
                         <p:outputLabel for="nombre" value="Nombre" />
                         <p:inputText id="nombre" value="#{tipoValorBean.tipoValor.nombre}"  />
