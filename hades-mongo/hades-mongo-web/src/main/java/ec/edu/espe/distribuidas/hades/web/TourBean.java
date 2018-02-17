@@ -15,6 +15,7 @@ import ec.edu.espe.distribuidas.hades.service.TipoTourService;
 import ec.edu.espe.distribuidas.hades.service.TourService;
 import ec.edu.espe.distribuidas.hades.web.util.FacesUtil;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -29,6 +30,11 @@ import javax.inject.Named;
 @ViewScoped
 public class TourBean extends BaseBean implements Serializable {
 
+    private String filtro;
+    private String tipoTourBusqueda;
+    private boolean enBusquedaPorTipo;
+    private Date fechaInicioBusqueda;
+    private Date fechaFinBusqueda;
     private List<Tour> tours;
     private Tour tour;
     private Tour tourSel;
@@ -44,10 +50,27 @@ public class TourBean extends BaseBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        this.filtro = "TIP";
+        this.enBusquedaPorTipo = true;
         this.tours = this.tourService.obtenerTodos();
         this.tour = new Tour();
         this.tiposTours = this.tipoTourService.obtenerTodos();
         this.cruceros = this.cruceroService.obtenerTodos();
+    }
+    
+    public void cambiarFiltro() {
+        this.enBusquedaPorTipo = !this.enBusquedaPorTipo;
+        System.out.println("Valor para enbusqueda: "+this.enBusquedaPorTipo);
+    }
+    
+    public void buscar() {
+        if (this.enBusquedaPorTipo) {
+            TipoTour tipoTour = new TipoTour();
+            tipoTour.setCodigo(this.tipoTourBusqueda);
+            this.tours = this.tourService.buscarPorTipo(recuperaTipoTour(tipoTour));
+        } else {
+            this.tours = this.tourService.buscarPorFechas(this.fechaInicioBusqueda, this.fechaFinBusqueda);
+        }
     }
 
     @Override
@@ -95,6 +118,9 @@ public class TourBean extends BaseBean implements Serializable {
 
     public void guardar() {
         try {
+            
+            tour.setTipoTour(retornaTipoTour(this.tour));
+            tour.setCrucero(retornaCrucero(this.tour));
 
             if (this.enAgregar) {
                 this.tourService.crear(this.tour);
@@ -150,5 +176,90 @@ public class TourBean extends BaseBean implements Serializable {
 
     public List<Crucero> getCruceros() {
         return cruceros;
+    }
+
+    public String getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(String filtro) {
+        this.filtro = filtro;
+    }
+
+    public String getTipoTourBusqueda() {
+        return tipoTourBusqueda;
+    }
+
+    public void setTipoTourBusqueda(String tipoTourBusqueda) {
+        this.tipoTourBusqueda = tipoTourBusqueda;
+    }
+
+    public boolean isEnBusquedaPorTipo() {
+        return enBusquedaPorTipo;
+    }
+
+    public void setEnBusquedaPorTipo(boolean enBusquedaPorTipo) {
+        this.enBusquedaPorTipo = enBusquedaPorTipo;
+    }
+
+    public Date getFechaInicioBusqueda() {
+        return fechaInicioBusqueda;
+    }
+
+    public void setFechaInicioBusqueda(Date fechaInicioBusqueda) {
+        this.fechaInicioBusqueda = fechaInicioBusqueda;
+    }
+
+    public Date getFechaFinBusqueda() {
+        return fechaFinBusqueda;
+    }
+
+    public void setFechaFinBusqueda(Date fechaFinBusqueda) {
+        this.fechaFinBusqueda = fechaFinBusqueda;
+    }
+    
+    public TipoTour retornaTipoTour(Tour tour)
+    {
+        TipoTour aux = new TipoTour();
+        
+        for(int i= 0; i<tiposTours.size();i++)
+        {
+            aux= tiposTours.get(i);
+            if(aux.getCodigo().equals(tour.getTipoTour().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    public Crucero retornaCrucero(Tour tour)
+    {
+        Crucero aux = new Crucero();
+        
+        for(int i= 0; i<tiposTours.size();i++)
+        {
+            aux= cruceros.get(i);
+            if(aux.getCodigo().equals(tour.getCrucero().getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    public TipoTour recuperaTipoTour(TipoTour tipoTour)
+    {
+        TipoTour aux = new TipoTour();
+        
+        for(int i= 0; i<tiposTours.size();i++)
+        {
+            aux= tiposTours.get(i);
+            if(aux.getCodigo().equals(tipoTour.getCodigo()))
+            {
+                break;
+            }
+        }
+        return aux;
     }
 }

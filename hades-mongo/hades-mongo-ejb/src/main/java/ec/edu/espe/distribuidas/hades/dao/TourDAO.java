@@ -5,7 +5,9 @@
  */
 package ec.edu.espe.distribuidas.hades.dao;
 
+import ec.edu.espe.distribuidas.hades.model.TipoTour;
 import ec.edu.espe.distribuidas.hades.model.Tour;
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -16,9 +18,8 @@ import org.mongodb.morphia.query.Query;
  *
  * @author hendrix
  */
-public class TourDAO  extends BasicDAO<Tour, ObjectId> {
-    
-    
+public class TourDAO extends BasicDAO<Tour, ObjectId> {
+
     public TourDAO(Class<Tour> objectEntity, Datastore ds) {
         super(objectEntity, ds);
     }
@@ -27,5 +28,18 @@ public class TourDAO  extends BasicDAO<Tour, ObjectId> {
         Query<Tour> qry = getDatastore().createQuery(Tour.class);
         qry.criteria("codigo").equal(codigo);
         return  qry.asList();
+     }
+
+    public List<Tour> findByFechas(Date fechaInicio, Date fechaFin) {
+        Query<Tour> qry = getDatastore().createQuery(Tour.class);
+        qry.and(qry.criteria("fechaInicio").greaterThanOrEq(fechaInicio), qry.criteria("fechaFin").lessThanOrEq(fechaFin));
+        return qry.asList();
+    }
+
+    public List<Tour> findByTipo(TipoTour tipoTour) {
+        Query<Tour> qry = getDatastore().createQuery(Tour.class);
+        qry.criteria("tipoTour").equal(tipoTour);
+        return qry.asList();
+
     }
 }
