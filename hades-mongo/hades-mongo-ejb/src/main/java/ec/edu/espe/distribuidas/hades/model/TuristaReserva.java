@@ -5,26 +5,58 @@
  */
 package ec.edu.espe.distribuidas.hades.model;
 
+import ec.edu.espe.distribuidas.nosql.mongo.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
-import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.IndexOptions;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Reference;
 
 /**
  *
  * @author user
  */
-@Embedded
-public class TuristaReserva {
+@Entity(noClassnameStored = true, value = "turista")
+public class TuristaReserva extends BaseEntity {
     
+    @Indexed(options = @IndexOptions(name = "turista_codigoUIdx", unique = true))
+    private Integer codigo;
     private String tipoIdentificacion;
     private String identificacion;
     private String nombre;
     private Date fechaNacimiento;
     private BigDecimal pesoMaleta;
+    private Integer codReserva;
     @Reference
     private Reserva Reserva;
    
+
+    public TuristaReserva() {
+    }
+
+    
+    
+    public TuristaReserva(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Integer getCodReserva() {
+        return codReserva;
+    }
+
+    public void setCodReserva(Integer codReserva) {
+        this.codReserva = codReserva;
+    }
+    
     public String getTipoIdentificacion() {
         return tipoIdentificacion;
     }
@@ -72,5 +104,31 @@ public class TuristaReserva {
     public void setReserva(Reserva Reserva) {
         this.Reserva = Reserva;
     }
+    
+     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (codigo != null ? codigo.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof TuristaReserva)) {
+            return false;
+        }
+        TuristaReserva other = (TuristaReserva) object;
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ec.edu.espe.distribuidas.hades.model.TuristaReserva[ codigo=" + codigo + " ]";
+    }
+
        
 }
