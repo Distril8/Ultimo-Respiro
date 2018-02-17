@@ -1,23 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Hades Cruise
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Hades Cruise Corp.
  */
 package ec.edu.espe.distribuidas.hades.web;
 
-import ec.edu.espe.distribuidas.hades.model.Camarote;
-import ec.edu.espe.distribuidas.hades.model.Cliente;
+import ec.edu.espe.distribuidas.hades.model.Crucero;
 import ec.edu.espe.distribuidas.hades.model.Reserva;
-import ec.edu.espe.distribuidas.hades.model.TipoAlimentacion;
+import ec.edu.espe.distribuidas.hades.model.TipoTour;
 import ec.edu.espe.distribuidas.hades.model.Tour;
-import ec.edu.espe.distribuidas.hades.service.CamaroteService;
-import ec.edu.espe.distribuidas.hades.service.ClienteService;
+import ec.edu.espe.distribuidas.hades.service.CruceroService;
 import ec.edu.espe.distribuidas.hades.service.ReservaService;
-import ec.edu.espe.distribuidas.hades.service.TipoAlimentacionService;
+import ec.edu.espe.distribuidas.hades.service.TipoTourService;
 import ec.edu.espe.distribuidas.hades.service.TourService;
+import ec.edu.espe.distribuidas.hades.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -25,154 +25,119 @@ import javax.inject.Named;
 
 /**
  *
- * @author Hendrix
+ * @author Hades Cruise Corp.
  */
 @Named
 @ViewScoped
-public class ReservaBean  extends BaseBean implements Serializable{
-    
-   
-    private List<Cliente> clientes;
-    //private String clienteBusqueda;
-    private List<Tour> tours;
-    //private Integer tourBusqueda;
-    
-    private List<Camarote> camarotes;
-    private Camarote camarote;
-    private List<TipoAlimentacion> alimentaciones;
-    private Reserva reserva;
-    
-    //private List<Camarote> listadoCamarotes;
-    //private List<TipoAlimentacion> tiposDeAlimentacion;
+public class ReservaBean extends BaseBean implements Serializable {
 
-    
-    
-    //private Reserva reserva;
-    //private Camarote camarote;
-    //private Cliente cliente;
-    //private TipoAlimentacion alimentacion;
-    //private Tour tour;
-    
-    private static final Logger LOG = Logger.getLogger(ReservaBean.class.getName());
+    private List<Reserva> reservas;
+    private Reserva reserva;
+    private Reserva reservaSel;
+    private List<TipoTour> tiposTours;
+    private List<Crucero> cruceros;
+    private List<Tour> tours;
+    private Tour tour;
+
     @Inject
-    private ClienteService clienteService;
+    private ReservaService reservaService;
     @Inject
     private TourService tourService;
     @Inject
-    private CamaroteService camaroteService;
+    private TipoTourService tipoTourService;
     @Inject
-    private TipoAlimentacionService alimentacionService;
-    @Inject
-    private ReservaService reservaService;
-    
+    private CruceroService cruceroService;
+
     @PostConstruct
     public void init() {
-          
-        this.clientes = this.clienteService.obtenerTodos();
         this.tours = this.tourService.obtenerTodos();
-        this.camarotes = this.camaroteService.obtenerTodos();
-        this.alimentaciones = this.alimentacionService.obtenerTodos();
-        
-        //this.listadoCamarotes = this.camaroteService.obtenerPorCrucero(listadoTours.get(0).getCrucero().getCodigo());
-        //this.camarote = (this.camaroteService.obtenerInfoCamarote(listadoCamarotes.get(0).getCrucero().getCodigo(),(int) listadoCamarotes.get(0).getNumero()));
-        //this.reserva.setCamarote(this.camaroteService.obtenerInfoCamarote(listadoCamarotes.get(0).getCrucero().getCodigo(),(int) listadoCamarotes.get(0).getNumero()));
-        //System.out.println("Init: "+this.reserva.getCamarote().getTipoCamarote().getNombre());
-        //System.out.println("Init2: "+this.reserva.getCamarote().getNumero());
+        this.tour = new Tour();
+        this.tiposTours = this.tipoTourService.obtenerTodos();
+        this.cruceros = this.cruceroService.obtenerTodos();
+        this.reservas = this.reservaService.obtenerTodos();
+        this.reserva = new Reserva();
     }
-    
+
     @Override
     public void agregar() {
-        //this.reserva = new Reserva();
+        this.reserva = new Reserva();
+        this.reservas = this.reservaService.obtenerTodos();
+        
         super.agregar();
-        
     }
-    
-    public void buscar(){
-        //this.clientes = this.clienteService.obtenerPorCodigo(this.clienteService.obtenerPorIdentificacion(this.clienteBusqueda));
-        //this.tours = this.tourService.obtenerPorCodigoTour(this.tourService.obtenerPorCodigo(this.tourBusqueda));
-        //LOG.info("clienteBusqueda: "+this.clienteBusqueda);
-    }
-    
-    
-    public void guardar() {
-        this.reservaService.crear(this.reserva);
-        
-//        this.reserva.setCliente(this.clienteService.obtenerPorIdentificacion(this.cliente.getClientePK().getIdentificacion()));
-//        this.reserva.setCamarote(this.camaroteService.obtenerInfoCamarote(this.tour.getCrucero().getCodigo(),(int) this.camarote.getNumero()));
-//        
-//        this.reserva.setCodigo(codRandom());
-//        this.reserva.setIdentificacion(this.reserva.getCliente().getClientePK().getIdentificacion());
-//        this.reserva.setTipoIdentificacion(this.reserva.getCliente().getClientePK().getTipoIdentificacion());
-//        this.reserva.setCodTour(this.tour.getPk().getCodTour());
-//        this.reserva.setCodTipoTour(this.tour.getPk().getCodTipoTour());
-//        this.reserva.setCodCrucero(this.tour.getPk().getCodCrucero());
-//        this.reserva.setCodCamarote(this.camarote.getPk().getCodCamarote());
-//        this.reserva.setCodTipoCamarote(this.camarote.getPk().getCodTipoCamarote());
-//        this.reserva.setCodTipoAlimentacion(this.alimentacion.getCodigo());
-//
-//        System.out.println("ID Cliente en reserva: "+ this.reserva.getIdentificacion());
-//        System.out.println("Tipo de identificacion en reserva: "+ this.reserva.getTipoIdentificacion());
-//        System.out.println("Cod Tour: "+ this.reserva.getCodTour());
-//        System.out.println("Tipo Tour: "+ this.reserva.getCodTipoTour());
-//        System.out.println("Cod Crucero: "+ this.reserva.getCodCrucero());
-//        System.out.println("Camarote: "+ this.reserva.getCodCamarote());
-//        System.out.println("Tipo camarote: "+ this.reserva.getCodTipoCamarote());
-//        System.out.println("Tipo alimentacion: "+ this.reserva.getCodTipoAlimentacion());
-//        System.out.println("Fecha: "+ this.reserva.getFechaEmision());       
-//        System.out.println("random "+ codRandom());
-//        
-//        super.reset();
-//        this.reservaService.crear(reserva);
-//        FacesUtil.addMessageInfo("Se creo la reserva");
-//        
-    }
-    
+
     public void cancelar() {
         super.reset();
         this.reserva = new Reserva();
-    }
-    
-    /*public void actualizarCamarotes(){
+        this.reservas = this.reservaService.obtenerTodos();
         
-        this.tour = (this.tourService.obtenerTourPorCodigo(this.tour.getPk().getCodTour()));
-        System.out.println("Codigo del tour: "+this.tour.getPk().getCodTour());
-        this.listadoCamarotes = this.camaroteService.obtenerPorCrucero(this.tour.getCrucero().getCodigo());
-    }
-    
-    public void actualizarTipo(){
-         System.out.println("Entro Tipo");
-         System.out.println("Numero Camarote: "+this.camarote.getNumero());
-         this.reserva.setCamarote(this.camaroteService.obtenerInfoCamarote(this.tour.getCrucero().getCodigo(),(int) this.camarote.getNumero()));
-         this.camarote = (this.camaroteService.obtenerInfoCamarote(this.tour.getCrucero().getCodigo(),(int) this.camarote.getNumero()));
-    }*/
-    
-    
-    private String codRandom (){
-        char[] chr={'A','C','D','1','2','3'};
-		String aleatorio="";
- 
-		for(int i=0;i<=5;i++){
-			aleatorio+=chr[(int)(Math.random()*6)];
-		}
-         return aleatorio;             
-    }
-    
-    //Setters y Getters
-
-    public List<Cliente> getClientes() {
-        return clientes;
     }
 
-    public List<Tour> getTours() {
-        return tours;
+//    @Override
+//    public void modificar() {
+//        super.modificar();
+//        this.reserva = new Reserva();
+//        this.tour.setCodigo(this.tourSel.getCodigo());
+//        this.tour.setTipoTour(this.tourSel.getTipoTour());
+//        this.tour.setCrucero(this.tourSel.getCrucero());
+//        this.tour.setNombre(this.tourSel.getNombre());
+//        this.tour.setDuracion(this.tourSel.getDuracion());
+//        this.tour.setFechaInicio(this.tourSel.getFechaInicio());
+//        this.tour.setFechaInicio(this.tourSel.getFechaFin());
+//        this.tour.setPuertoEmbarque(this.tourSel.getPuertoEmbarque());
+//        this.tour.setPuertoDesembarque(this.tourSel.getPuertoDesembarque());
+//        this.tour.setPrecioBase(this.tourSel.getPrecioBase());
+//        this.tour.setPorcentajeMenu(this.tourSel.getPorcentajeMenu());
+//    }
+
+//    public void eliminar() {
+//        try {
+//            this.tourService.eliminar(this.tourSel.getCodigo().toString());
+//            this.tours = this.tourService.obtenerTodos();
+//            FacesUtil.addMessageInfo("Se elimino el registro");
+//            this.tourSel = null;
+//        } catch (Exception e) {
+//            FacesUtil.addMessageError(null, "No se puede eliminar el registro seleccionado. Verifique que no tenga informaci\u00f3n relacionada.");
+//        }
+//    }
+
+    public void guardar() {
+        try {
+
+            if (this.enAgregar) {
+                this.reservaService.crear(this.reserva);
+                FacesUtil.addMessageInfo("Se agrego La reserva: " + this.reserva.getCodigo());
+            } else {
+                this.reservaService.modificar(this.reserva);
+                FacesUtil.addMessageInfo("Se modific\u00f3 la Actividad con c\u00f3digo: " + this.reserva.getCodigo());
+            }
+
+        } catch (Exception e) {
+            FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n");
+        }
+
+        super.reset();
+        this.reserva = new Reserva();
+        //this.actividadPK = new ActividadPK();
+        this.reservas = this.reservaService.obtenerTodos();
+        
+        
     }
 
-    public List<Camarote> getCamarotes() {
-        return camarotes;
+    public Tour getTour() {
+        return tour;
     }
 
-    public List<TipoAlimentacion> getAlimentaciones() {
-        return alimentaciones;
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
     public Reserva getReserva() {
@@ -182,34 +147,34 @@ public class ReservaBean  extends BaseBean implements Serializable{
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
-    
 
-    public Camarote getCamarote() {
-        return camarote;
+    public Reserva getReservaSel() {
+        return reservaSel;
     }
 
-    public void setCamarote(Camarote camarote) {
-        this.camarote = camarote;
-    }
-    
-    /*public String getClienteBusqueda() {
-        return clienteBusqueda;
+    public void setReservaSel(Reserva reservaSel) {
+        this.reservaSel = reservaSel;
     }
 
-    public void setClienteBusqueda(String clienteBusqueda) {
-        this.clienteBusqueda = clienteBusqueda;
+ 
+
+    public CruceroService getCruceroService() {
+        return cruceroService;
     }
 
-    public Integer getTourBusqueda() {
-        return tourBusqueda;
+    public void setCruceroService(CruceroService cruceroService) {
+        this.cruceroService = cruceroService;
     }
 
-    public void setTourBusqueda(Integer tourBusqueda) {
-        this.tourBusqueda = tourBusqueda;
-    }*/
+    public List<Tour> getTours() {
+        return tours;
+    }
 
-    
-    
-    
-    
+    public List<TipoTour> getTiposTours() {
+        return tiposTours;
+    }
+
+    public List<Crucero> getCruceros() {
+        return cruceros;
+    }
 }

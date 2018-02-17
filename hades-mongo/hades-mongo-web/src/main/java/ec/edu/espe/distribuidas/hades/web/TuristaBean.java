@@ -82,17 +82,21 @@ public class TuristaBean extends BaseBean implements Serializable {
     public void guardar() {
         int a= new Random().nextInt(10000);
        try {
-            for (int i = 0; i < this.turistaTemp.size(); i++) {
-                this.turistaTemp.get(i).setCodReserva(a);
-                this.turistaService.crear(this.turistaTemp.get(i));
-           }
-            this.reserva.setCodigo(Integer.toString(a));
-            this.reservaService.crear(this.reserva);
+//            for (int i = 0; i < this.turistaTemp.size(); i++) {
+//                this.turistaTemp.get(i).setCodReserva(a);
+//                this.turistaService.crear(this.turistaTemp.get(i));
+//           }
+            
+//            this.reserva.setCodigo(Integer.toString(a));
+//            this.reservaService.crear(this.reserva);
+             this.turista.setCodigo(1);
+             this.turistaService.crear(this.turista);
             FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
             
             
         } catch (Exception ex) {
-            FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n");
+            FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n" + ex);
+            
         }
         super.reset();
         this.turista = new TuristaReserva();
@@ -104,13 +108,13 @@ public class TuristaBean extends BaseBean implements Serializable {
             if (this.enAgregar) {
             this.turista.setCodigo(new Random().nextInt(10000));
             this.turistaTemp.add(turista);
-//this.turistaService.crear(this.turista);
-                FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
+            FacesUtil.addMessageInfo("Se agreg\u00f3 el Turista: " + this.turista.getNombre());
             } else {
                 this.turistaService.modificar(this.turista);
                 FacesUtil.addMessageInfo("Se modific\u00f3 el Turista: " + this.turista.getNombre());
             }
         } catch (Exception ex) {
+            System.out.println("Codigo"+ turistaTemp.get(0).getCodigo() );
             FacesUtil.addMessageError(null, "Ocurrí\u00f3 un error al actualizar la informaci\u00f3n");
         }
         super.reset();
