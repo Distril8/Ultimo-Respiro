@@ -38,12 +38,15 @@
                         <p:submenu label="Clientes" >
                             <p:menuitem value="Agregar cliente" action="cliente" />
                         </p:submenu>
+                        <p:submenu label="Check Out" >
+                            <p:menuitem value="checkOut" action="checkOut" />
+                        </p:submenu>
                         <p:menuitem value="#{usuarioSesionBean.nombre}" url="#"/>
                         <p:menuitem value="Salir" icon="ui-icon-extlink" action="#{indexBean.logout()}" />
                     </p:menubar>
                     <p:spacer height="10px"/>
                     <ui:insert name="contenido">
- 
+
                     </ui:insert>
                     <p>&nbsp;</p>
                 </h:form>

@@ -28,6 +28,8 @@ public class TuristaReserva extends BaseEntity {
     private Date fechaNacimiento;
     private BigDecimal pesoMaleta;
     private Integer codReserva;
+    private BigDecimal valorMaleta;
+
     @Reference
     private Reserva Reserva;
    
@@ -97,6 +99,14 @@ public class TuristaReserva extends BaseEntity {
         this.pesoMaleta = pesoMaleta;
     }
 
+    public BigDecimal getValorMaleta() {
+        return valorMaleta;
+    }
+
+    public void setValorMaleta(BigDecimal valorMaleta) {
+        this.valorMaleta = valorMaleta;
+    }
+    
     public Reserva getReserva() {
         return Reserva;
     }
@@ -127,8 +137,7 @@ public class TuristaReserva extends BaseEntity {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.distribuidas.hades.model.TuristaReserva[ codigo=" + codigo + " ]";
+        return "TuristaReserva{" + "codigo=" + codigo + ", tipoIdentificacion=" + tipoIdentificacion + ", identificacion=" + identificacion + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", pesoMaleta=" + pesoMaleta + ", codReserva=" + codReserva + ", valorMaleta=" + valorMaleta + ", Reserva=" + Reserva + '}';
     }
-
        
 }
