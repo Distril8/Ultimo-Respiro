@@ -42,6 +42,16 @@ public class MenuService {
     }
 
     public void crear(Menu menu) {
+        List<Menu> aux = this.menuDao.find().asList();
+        Integer codigo;
+        if (aux.isEmpty()) {
+            codigo = 1;
+        } else {
+            Integer count = aux.size();
+            Menu last = aux.get(count - 1);
+            codigo = last.getCodigo() + 1;
+        }
+        menu.setCodigo(codigo);
         this.menuDao.save(menu);
     }
 

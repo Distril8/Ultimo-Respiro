@@ -37,16 +37,13 @@ public class TuristaService {
         return this.turistaDao.find().asList();
     }
 
-   public TuristaReserva obtenerPorCodigo(String codigo) {
-        return this.turistaDao.findOne("codigo",codigo);
+    public TuristaReserva obtenerPorCodigo(String codigo) {
+        return this.turistaDao.findOne("codigo", codigo);
     }
-    
 
     public void crear(TuristaReserva turista) {
         this.turistaDao.save(turista);
     }
-    
-    
 
     public void modificar(TuristaReserva turista) {
         TuristaReserva aux = this.turistaDao.findOne("codigo", turista.getCodigo());
@@ -54,11 +51,9 @@ public class TuristaService {
         this.turistaDao.save(turista);
     }
 
-  
     public void eliminar(Integer codigo) {
         TuristaReserva turista = this.turistaDao.findOne("codigo", codigo);
         this.turistaDao.delete(turista);
     }
-    
-   
+
 }
