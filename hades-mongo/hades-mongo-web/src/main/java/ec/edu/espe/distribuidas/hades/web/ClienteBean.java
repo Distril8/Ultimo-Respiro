@@ -11,6 +11,7 @@ import ec.edu.espe.distribuidas.hades.model.Cliente;
 import ec.edu.espe.distribuidas.hades.service.ClienteService;
 import ec.edu.espe.distribuidas.hades.web.util.FacesUtil;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -111,6 +112,11 @@ public class ClienteBean extends BaseBean implements Serializable {
 
     public List<Cliente> getClientes() {
         return clientes;
+    }
+    
+    public Date fecha(){
+        Date fecha = new Date();
+        return fecha;
     }
     
 }

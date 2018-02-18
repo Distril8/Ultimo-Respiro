@@ -68,6 +68,9 @@
                                 <p:column headerText="Numero">
                                     <h:outputText value="#{camarote.numero}" />
                                 </p:column>
+                                <p:column headerText="Numero">
+                                    <h:outputText value="#{camarote.tipo.nombre}" />
+                                </p:column>
                                 <p:column headerText="Capacidad">
                                     <h:outputText value="#{camarote.capacidad}" />
                                 </p:column>
@@ -93,6 +96,9 @@
                                 </p:column>
                                 <p:column headerText="Nombre del Cliente">
                                     <h:outputText value="#{cliente.nombre}"  />
+                                </p:column>
+                                <p:column headerText="Fecha">
+                                    <h:outputText value="#{clienteBean.fecha()}"  />
                                 </p:column>
                             </p:dataTable>
 

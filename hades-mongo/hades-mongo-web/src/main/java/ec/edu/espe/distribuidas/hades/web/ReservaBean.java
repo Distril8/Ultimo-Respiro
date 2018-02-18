@@ -19,6 +19,7 @@ import ec.edu.espe.distribuidas.hades.service.TipoTourService;
 import ec.edu.espe.distribuidas.hades.service.TourService;
 import ec.edu.espe.distribuidas.hades.web.util.FacesUtil;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -245,4 +246,5 @@ public class ReservaBean extends BaseBean implements Serializable {
         }
         return aux;
     }
+    
 }
