@@ -51,7 +51,7 @@
                                 </p:column>
                                 <p:column headerText="Precio">
                                     <h:outputText value="#{tour.precioBase}" />
-                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2" currencySymbol="$"/>
+                                    
                                 </p:column>
 
                             </p:dataTable>
@@ -86,7 +86,7 @@
                     <p:tab id="confirm" title="Confirmacion de Reserva">
                         <p:panel  header="Reserva">
 
-                            <p:dataTable id="tbl" var="reserva" value="#{clienteBean.clienteSel}" 
+                            <p:dataTable id="tbl" var="cliente" value="#{clienteBean.clienteSel}" 
                                          >
                                 <p:column headerText="Identificacion">
                                     <h:outputText value="#{cliente.identificacion}"  />
@@ -96,7 +96,7 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:dataTable id="tbl1" var="Tour" value="#{tourBean.tourSel}" 
+                            <p:dataTable id="tbl1" var="tour" value="#{tourBean.tourSel}" 
                                          >
                                 <p:column headerText="Nombre del Tour">
                                     <h:outputText value="#{tour.nombre}"  />
@@ -115,7 +115,7 @@
 
                                 <p:column headerText="Precio Base">
                                     <h:outputText value="#{tour.precioBase}"  >
-                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" currencySymbol="$"/>
+                                      
                                     </h:outputText>
                                 </p:column>
                                 <p:column headerText="Estado">
@@ -123,38 +123,12 @@
                                 </p:column>
                                 <f:facet name="footer">
                                     Total a pagar $: <h:outputText value="1">
-                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" currencySymbol="$"/>
+                                        
                                     </h:outputText>
                                 </f:facet>
                             </p:dataTable>
-                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                            <!--<p:commandButton value="Agregar Turista" actionListener="#{turistaBean.agregar()}" update="@form"/>
-
-                            <!--<p:panel header="#{turistaBean.titulo} Turista" visible="#{turistaBean.habilitaForm}">
-                                <p:panelGrid columns="2">
-                                    <p:outputLabel value="Tipo de Identificacion" />
-                                    <p:selectOneMenu id="tipoIndentificacion" value="#{turistaBean.turista.tipoIdentificacion}">
-                                        <f:selectItem itemValue="CED" itemLabel="CEDULA"/>
-                                        <f:selectItem itemValue="RUC" itemLabel="RUC"/>
-                                    </p:selectOneMenu>
-                                    <p:outputLabel for="identificacion" value="Identificacion" />
-                                    <p:inputText id="identificacion" value="#{turistaBean.turista.identificacion}" />
-                                    <p:outputLabel for="nombreTu" value="Nombre del Turista" />
-                                    <p:inputText id="nombreTu" value="#{turistaBean.turista.nombre}" />
-                                    <p:outputLabel for="fechaNace" value="Fecha de Nacimiento" />
-                                    <p:calendar id="fechaNace" value="#{turistaBean.turista.fechaNacimiento}" showOn="button" pattern="MM/dd/yyyy"/>
-                                </p:panelGrid>
-                                <p:commandButton value="Aceptar" actionListener="#{turistaBean.guardar}" update="@form" />
-                                <p:commandButton value="Cancelar" actionListener="#{turistaBean.cancelar}" update="@form" />
-                            </p:panel>-->
-
-                        </p:panel>
-
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
-
+                            
+                         
                         </p:panel> 
 
                         <h:outputText />
@@ -166,7 +140,6 @@
                         </h:commandLink>
                         <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
-                        </p:panel>
                     </p:tab>
                 </p:wizard>
             </p:panel>
